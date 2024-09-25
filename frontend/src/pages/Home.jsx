@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import './Home.css';
 
 export default function Home () {
     let navigate = useNavigate()
@@ -14,9 +15,10 @@ export default function Home () {
     }
 
     return (
-        <div>
+        <div className="container">
+            <h1 className="heading">Report and PPT Submission</h1>
             <div>
-                <input type="text" value={student} onChange={e => setStudent(e.target.value)} />
+                <input type="text" value={student} onChange={e => setStudent(e.target.value)} placeholder="Enter Student ID" />
                 &nbsp;
                 <button onClick={handleStudent}>Student</button>
             </div>
@@ -24,7 +26,7 @@ export default function Home () {
             <hr />
             <br />
             <div>
-                <button onClick={() => navigate("/guide")}>Guide</button>
+                <button className="guide-butteon" onClick={() => navigate("/guide")}>Guide</button>
             </div>
         </div>
     )

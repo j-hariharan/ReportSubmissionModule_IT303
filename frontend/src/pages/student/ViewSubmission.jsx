@@ -1,13 +1,27 @@
-export default function ViewSubmission ({ submission }) {
-    console.log(submission)
+import './ViewSubmission.css'; // Import your CSS file
+
+export default function ViewSubmission({ submission }) {
+    console.log(submission);
+    
     return (
-        <div>
-            <p>Upload time: {(new Date(submission.upload_time.seconds*1000)).toString()}</p>
-            <a target="_blank" href={submission.ppt_link}>PPT</a>
-            <br />
-            <a target="_blank" href={submission.report_link}>Report</a>
-            <br />
-            <p>Feedback: {submission.feedback || "nothing yet"}</p>
+        <div className="submission-container">
+            <div className="upload-time">
+                <p>Upload time: {(new Date(submission.upload_time.seconds * 1000)).toString()}</p>
+            </div>
+            <div className="file-links">
+                <div className="button-wrapper">
+                    <a target="_blank" rel="noopener noreferrer" href={submission.ppt_link}>
+                        <button className="file-button">View PPT</button>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href={submission.report_link}>
+                        <button className="file-button">View Report</button>
+                    </a>
+                </div>
+            </div>
+            <div className="feedback">
+                <p>Feedback: {submission.feedback || "No feedback received yet."}</p>
+            </div>
         </div>
-    )
+    );
 }
+

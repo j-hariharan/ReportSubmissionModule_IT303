@@ -1,13 +1,17 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
-import { useState } from "react"
+import { useState, useRef } from "react";
 import { useParams } from "react-router-dom"
 import { db, storage } from "../../helpers/firebase"
 import { collection, doc, setDoc } from "firebase/firestore"
+import './UploadDocuments.css';
 
 export default function UploadDocuments () {
     let { studentID } = useParams()
     let [ report, setreport ] = useState(null)
     let [ ppt, setPpt ] = useState(null)
+
+    const reportInputRef = useRef(null); // Reference for the report input
+    const pptInputRef = useRef(null); // Reference for the PPT input
 
     async function handleSubmit () {
         if (!report || !ppt) {
@@ -34,22 +38,49 @@ export default function UploadDocuments () {
     }
 
     return (
-        <div>
+        <div className="upload-container">
+            <div className="upload-section report-section">
+                <h2>Report Submission</h2>
+                <button className="choose-file-button" onClick={() => reportInputRef.current.click()}>
+                    Choose File
+                </button>
             <input 
                 type="file" 
                 accept=".pdf" 
-                placeholder="Upload Report" 
-                onChange={e => setreport(e.target.files[0]) }
+                onChange={e =>{
+                    const file = e.target.files[0];
+                    setreport(file);
+                } }
+                className="file-input"
+                ref={reportInputRef} // Use reference for the report input
+                style={{ display: 'none' }} // Hide the default file input
             />
-            <br /><br />
+                <div className="file-name">
+                    {report ? report.name : "No file chosen"}
+                </div>
+            </div>
+            <div className="upload-section ppt-section">
+            <h2>PPT Submission</h2>
+            <button className="choose-file-button" onClick={() => pptInputRef.current.click()}>
+                    Choose File
+                </button>
             <input 
                 type="file" 
                 accept=".pdf" 
                 placeholder="Upload PPT" 
-                onChange={e => setPpt(e.target.files[0]) }
+                onChange={e => {
+                    const file = e.target.files[0];
+                    setPpt(file);
+                }}
+                className="file-input"
+                ref={pptInputRef} // Use reference for the PPT input
+                style={{ display: 'none' }} // Hide the default file input
             />
-            <br /><br />
-            <button onClick={handleSubmit}>Submit</button>
+            <div className="file-name">
+                    {ppt ? ppt.name : "No file chosen"}
+                </div>
+            </div>
+            <button onClick={handleSubmit} className="submit-button">Submit</button>
         </div>
     )
 }
