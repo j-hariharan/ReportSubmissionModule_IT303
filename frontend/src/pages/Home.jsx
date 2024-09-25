@@ -17,7 +17,7 @@ export default function Home () {
         <div>
             <div>
                 <input type="text" value={student} onChange={e => setStudent(e.target.value)} />
-                <br />
+                &nbsp;
                 <button onClick={handleStudent}>Student</button>
             </div>
             <br />
