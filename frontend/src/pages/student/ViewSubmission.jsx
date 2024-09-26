@@ -1,8 +1,6 @@
 import './ViewSubmission.css'; // Import your CSS file
 
 export default function ViewSubmission({ submission }) {
-    console.log(submission);
-    
     return (
         <div className="submission-container">
             <div className="upload-time">
