@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { collection, getDocs } from "firebase/firestore"
 import { db } from "../../helpers/firebase"
+import './GuidePage.css';
 
 export default function GuidePage () {
     let [ submissions, setSubmissions ] = useState([])
@@ -18,13 +19,13 @@ export default function GuidePage () {
     }, [])
 
     return (
-        <div>
-            <h1>Submissions</h1>
-            <div>
+        <div className="guide-contaianer">
+            <h1 className="guide-heading">Submissions</h1>
+            <div className="submissions-list">
                 {
                     submissions.map(submission => (
-                        <div key={submission.id}>
-                            <a href={`/guide/${submission.id}`}>{submission.id}</a>
+                        <div key={submission.id} className="submission-wrapper">
+                            <a href={`/guide/${submission.id}`} className="submission-item">{submission.id}</a>
                         </div>
                     ))
                 }
